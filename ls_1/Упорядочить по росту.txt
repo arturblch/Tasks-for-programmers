@@ -1,0 +1,39 @@
+
+
+a) const 	1, n^(1/ lg n) = 2, lg(lg* n), lg* (lg n ), lg* n,   2^(lg* n)
+b) log 		ln (ln n), sqrt(lg n), ln n, lg^2 n
+c) liner 	2^(sqrt(2*lg n)), sqrt(2)^(lg n),  ,2^(lg n),= n
+c1) 		n*lg n,= lg(n!) 
+d) poly 	n^2,= 4^(lg n), n^3
+d1) 		(lg n)! ~ ((n^0,5*lg n)/e)^(lg n)
+d2)			n^(lg lg n),= (lg n)^(lg n)
+e) c^n 		(3/2)^n,  2^n, n*2^n, e^n
+f) n! 		n!, (n+1)!
+g) 2^2^n	2^2^n, 2^2^(n+1)
+
+2^2^(n+1)
+2^2^n
+(n+1)!
+n!
+e^n
+n*2^n
+2^n
+(3/2)^n
+n^(lg lg n) = (lg n)^(lg n) 
+(lg n)!
+n^3
+n^2 = 4^(lg n)
+lg (n!) = n * lg (n)
+n = 2^lg n
+sqrt(2)^(lg n)
+2^(sqrt(2*lg n))
+lg^2 n
+ln n
+sqrt(lg n)
+ln (ln n)
+2^(lg* n)
+lg* n
+lg* (lg n )
+lg(lg* n)
+n^(1/ lg n)
+1
