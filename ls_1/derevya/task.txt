@@ -1,0 +1,12 @@
+Task
+
+Implement preorder, postorder and levelorder traversal which print node key. Each
+node is defined as:
+
+class Node
+{
+T Key;
+Node Parent;
+Node FirstChild;
+Node NextSibling;
+}
