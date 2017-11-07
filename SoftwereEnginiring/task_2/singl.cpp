@@ -1,5 +1,3 @@
-// Declaration
-
 class Singleton {
 private:
     Singleton() = default;
