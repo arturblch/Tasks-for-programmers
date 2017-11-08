@@ -1,30 +1,18 @@
 # Этот клас будет отвечать за создание процессов
 
-
 class Process_Control_Block:
-    def create_process(self, name, prior, cpu_burst):
+    def __init__(self, name, prior, cpu_burst):
         self.status = "Create"
-        self.pc = 0   # Program counter
-        self.reg = {  # Registers
-            "A": 0,
-            "B": 0,
-            "C": 0,
-            "D": 0,
-            "E": 0,
-            "H": 0,
-            "L": 0
-        }
-
-        self.prior = prior   # Priority
-        self.address = None  # Memory
-
+        self.pc = 0             # Program counter
+        self.prior = prior      # Priority
         self.cpu_burst = cpu_burst
 
     def finish_process(self):
-        self.life_time = 3
+        self.life_time = 64
         self.status = "Done"
 
-    def prepare_process(self):
+    def prepare_process(self, address):
+        self.address = address
         self.status = "Ready"
 
     def pause_process(self):
