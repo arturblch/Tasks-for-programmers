@@ -52,7 +52,6 @@ class CompositeOperation(Operation):
         message = "Process Operations:\n"
         for op in self.operations:
             message += "{0}\n".format(op.__str__())
-            message += "{0}\n".format(str(op))
         return message
 
 

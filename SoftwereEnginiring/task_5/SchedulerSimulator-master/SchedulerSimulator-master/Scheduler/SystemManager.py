@@ -88,8 +88,8 @@ class SystemManager(object):
 
         while not self.check_all_process_finished():
             sleep(3)
-            
-        self.stop_all_system_device()    
+
+        self.stop_all_system_device()
         # Now we need to plot the CPU Usage
 
         print "Exitting Application"

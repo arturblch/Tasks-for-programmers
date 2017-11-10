@@ -26,7 +26,7 @@ class Scheduler(threading.Thread):
 
 class LongTermScheduler(Scheduler):
 
-    def __init__(self, systemManager, processList, period=5):
+    def __init__(self, systemManager, processList, period=3):
         super(LongTermScheduler, self).__init__(systemManager=systemManager, processList=processList)
         self.check_period = period
         self.process_factory = ProcessFactory(systemManager=systemManager)
@@ -37,13 +37,13 @@ class LongTermScheduler(Scheduler):
         while not self.stop_request.is_set():
             if len(self.process_list) < self.system_manager.max_system_processes:
                 jobs_count = self.system_manager.max_system_processes - len(self.process_list)
-                for i in xrange(0, randrange(jobs_count)):
+                for i in xrange(0, randrange(jobs_count + 1)):
                     process = self.process_factory.create_process()
-
-                    Logger().log([process.process_operations.__str__()])
-
-
                     self.process_list.append(process) #ProcessList
+
+                    Logger().log([process.__str__(), process.process_operations.__str__(),
+                        "All proceses - %d" % (len(self.process_list))])
+
                     #Attach to system clock
                     self.system_manager.system_clock.attach(process)
                     sleep(self.check_period)
@@ -81,7 +81,6 @@ class FCFS(ShortTermScheduler):
     def fetch_process_to_execute(self):
         aux = float('Infinity')
         result = None
-        Logger().log([c.pid for c in self.short_term_process_list])
         for p in self.short_term_process_list:
             if p.last_device_executed_time["CPU"] < aux:
                 aux = p.last_device_executed_time["CPU"]

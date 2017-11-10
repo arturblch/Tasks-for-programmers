@@ -22,14 +22,14 @@ class Processor(threading.Thread):
         self.stop_request.set()
         super(Processor, self).join(timeout)
 
-    def __update_processes_cpu_time_instances(self):
+    def __update_processes_cpu_time_instances(self):        # 0 or 1 every process
         for p in self.system_manager.system_process_list:
             if p.state is p.cpu_execution_process:
                 p.cpu_execution_time_instances.append(1)
             else:
                 p.cpu_execution_time_instances.append(0)
 
-    def __adjust_processes_cpu_time_instances(self):
+    def __adjust_processes_cpu_time_instances(self):        # 0 in front of new proceses
         """This method inserts zeros at the cpu_time_instances list of those processes
         that were created when the simulator was already running. This adjust the list
         in a way of saying that a given processes was not being executed at the time"""
@@ -64,7 +64,6 @@ class Processor(threading.Thread):
                 self.system_manager.system_clock.tick()
                 self.__update_processes_cpu_time_instances()
                 self.idle_time_points.append(self.system_manager.system_clock.read_system_clock())
-                Logger().log([self.idle_time_points])
 
             if not self.stop_request.is_set():
                 process = self.queue.get()
@@ -72,4 +71,5 @@ class Processor(threading.Thread):
                 self.queue.task_done()
                 sleep(1)
 
+        Logger().log(["Idle time points: ", self.idle_time_points, "\n"])
         self.__adjust_processes_cpu_time_instances()
