@@ -1,9 +1,7 @@
 """
-Implementation of the PriD scheduler as introduced by Goossens et al. in
-Priority-Driven Scheduling of Periodic Task Systems on Multiprocessors.
+Implementation of the Round Robin scheduler
 """
 from simso.core import Scheduler, Timer
-from math import ceil
 from simso.schedulers import scheduler
 
 
