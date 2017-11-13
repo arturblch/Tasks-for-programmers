@@ -7,61 +7,42 @@ from math import ceil
 from simso.schedulers import scheduler
 
 
-@scheduler(
-    "simso.schedulers.RR",
-    required_task_fields=[{
-        'name': 'priority',
-        'type': 'int',
-        'default': '0'
-    }])
+@scheduler("simso.schedulers.RR")
 class RR(Scheduler):
     """Round Robin scheduler"""
 
     def init(self):
-        self.timers = {}
         self.ready_list = []
-        self.delay = 5
+        self.delay = 2
+        self.timer = Timer(self.sim, RR.end_event,
+                           (self, self.processors[0]), self.delay,
+                           cpu=self.processors[0], in_ms=True)
         self.interupt = False
 
     def on_activate(self, job):
         self.ready_list.append(job)
-        if job.task not in self.tasks_list:
-            self.tasks_list.append(job.task)
         job.cpu.resched()
 
     def on_terminated(self, job):
         if job in self.ready_list:
             self.ready_list.remove(job)
-        if job  in self.timers:
-            self.timers[job].stop()
-            del self.timers[job]
+        self.timer.stop()
         job.cpu.resched()
 
-    def end_event(self, job):
-        del self.timers[job]
+    def end_event(self, cpu):
         self.interupt = True
-        self.processors[0].resched()
+        self.timer.stop()
+        cpu.resched()
 
     def schedule(self, cpu):
-        if self.ready_list or cpu.running:
-            job = min(self.ready_list, key=lambda x: x.data["priority"])
-            if cpu.running and self.interupt:
-                    self.ready_list.remove(job)
-                    self.ready_list.append(cpu.running)
-                    return (job, cpu)
-
-            if (cpu.running is None
-                    or cpu.running.data["priority"] > job.data["priority"]):
-                if job not in self.timers:
-                    timer = Timer(self.sim, RR.end_event,
-                                  (self, cpu.running), self.delay,
-                                  cpu=cpu, in_ms=True)
-                    timer.start()
-                    self.timers[job] = timer
+        if self.ready_list:
+            job = self.ready_list[0]
+            if not cpu.running or self.interupt:
+                self.interupt = False
+                self.timer.start()
                 self.ready_list.remove(job)
                 if cpu.running:
                     self.ready_list.append(cpu.running)
                 return (job, cpu)
-
         else:
             return None
