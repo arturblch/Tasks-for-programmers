@@ -100,6 +100,10 @@ class MLFQ(Scheduler):
                     self.ready_lists[self.prior_table[cpu.running]].append(
                         cpu.running)
                 return (job, cpu)
+            elif self.interupt:
+                self.interupt = False
+                self.set_timer(self.prior_table[cpu.running])
+                return None
 
         elif self.interupt:
                 self.interupt = False
