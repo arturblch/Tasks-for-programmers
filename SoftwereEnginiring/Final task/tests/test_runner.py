@@ -10,10 +10,7 @@ def runner():
 
 
 def test_defult_example(runner):
-    runner.login("Test")
-    assert runner.remote_process_client.read_response()[0] == 0
-    runner.move(1, 1, 0)
-    assert runner.remote_process_client.read_response()[0] == 0
-    runner.turn()
-    assert runner.remote_process_client.read_response()[0] == 0
-    runner.logout()
+    assert runner.login("Test")[0] == 0
+    assert runner.move(1, 1, 0)[0] == 0
+    assert runner.turn()[0] == 0
+    assert runner.logout()[0] == 0
