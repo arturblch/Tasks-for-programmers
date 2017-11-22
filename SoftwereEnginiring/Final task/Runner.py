@@ -1,6 +1,6 @@
 import sys
 
-from Strategy import Strategy
+#from Strategy import Strategy
 from RemoteProcessClient import RemoteProcessClient
 
 
@@ -16,28 +16,25 @@ class Runner:
 
 
     def login(self, name):
-        self.remote_process_client.write_message('LOGIN', f'{{"name" : {name}}}' )
+        self.remote_process_client.write_message('LOGIN', {"name" : name})
+        
 
-    def logout(self, name):
+    def logout(self):
         self.remote_process_client.write_message('LOGOUT')
 
     def move(self, line_idx, speed, train_idx):
-        self.remote_process_client.write_message('MOVE', ' { \n' +
-                                                        f' "line_idx": {line_idx}, \n ' +
-                                                        f' "speed": {speed},       \n ' +
-                                                        f' "train_idx": {train_idx}\n ' +
-                                                         ' }')
-    def turn(self, name):
+        self.remote_process_client.write_message('MOVE', {"line_idx": line_idx, "speed": speed, "train_idx": train_idx})
+    def turn(self):
         self.remote_process_client.write_message('TURN')
 
     def map(self, layer):
-        self.remote_process_client.write_message('LOGIN', f'{{ "layer": {layer} }}')
-
+        self.remote_process_client.write_message('MAP', {"layer": layer })
+        return self.remote_process_client.read_response()
 
 
     def run(self):
         try:
-            self.login()
+            self.login(self.name)
             strategy = Strategy()
 
             while True:
@@ -49,4 +46,5 @@ class Runner:
             self.remote_process_client.close()
 
 
-Runner().run()
+if __name__ == '__main__':
+    Runner().run()

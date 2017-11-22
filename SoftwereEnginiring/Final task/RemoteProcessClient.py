@@ -56,11 +56,12 @@ class RemoteProcessClient:
         logger.info("Create socket")
         self.socket.connect((host, port))
         logger.info("Connection done")
+        self.socket.settimeout(5)
         self.read_buffer = bytes()
         self.read_index = 0
 
 
-    def write_message(self, action, data=""):
+    def write_message(self, action, data=None):
         if action in RemoteProcessClient.ACTION:
             self.write_uint(RemoteProcessClient.ACTION[action])
             logger.info("Action: %s", action)
@@ -71,10 +72,11 @@ class RemoteProcessClient:
         logger.info("Loging message: %s", data)
 
     def read_response(self):
-        result = self.read_enum(RemoteProcessClient.Result)
+        result = self.read_uint()
         data = self.read_string()
         logger.info("Result code: %d", result)
         logger.info("Data: %s", data)
+        return [result, data]
 
     def close(self):
         self.socket.close()

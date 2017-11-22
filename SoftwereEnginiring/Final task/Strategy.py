@@ -1,10 +1,3 @@
-from model.ActionType import ActionType
-from model.Game import Game
-from model.Move import Move
-from model.Player import Player
-from model.World import World
-
-
 class MyStrategy:
     def move(self, me: Player, world: World, game: Game, move: Move):
         if world.tick_index == 0:
