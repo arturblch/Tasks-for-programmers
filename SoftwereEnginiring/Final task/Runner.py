@@ -47,6 +47,7 @@ class Runner:
                 data = self.map(1)
                 print("Position - ", data[1]["train"][0]["position"])
                 sleep(1)
+            self.logout()
         finally:
             self.remote_process_client.close()
 
