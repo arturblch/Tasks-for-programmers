@@ -189,5 +189,7 @@ MOVE action must send follow fields:
 ### Turn
 Turn action needs for force next turn of the game and don't wait game's time slice. Game time slice equal to 1 second. TURN action don't need any parameters.
 Example of turn action bin data
+```JSON
 Hex: |05 00 00 00|00 00 00 00|
+```
 
