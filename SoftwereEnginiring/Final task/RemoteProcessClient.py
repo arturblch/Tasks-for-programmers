@@ -55,6 +55,26 @@ class RemoteProcessClient:
         self.read_buffer = bytes()
         self.read_index = 0
 
+    def login(self, name):
+        self.write_message('LOGIN', {"name" : name})
+        return self.read_response()
+
+    def logout(self):
+        self.write_message('LOGOUT')
+        return self.read_response()
+
+    def move(self, line_idx, speed, train_idx):
+        self.write_message('MOVE', {"line_idx": line_idx, "speed": speed, "train_idx": train_idx})
+        return self.read_response()
+
+    def turn(self):
+        self.write_message('TURN')
+        return self.read_response()
+
+    def map(self, layer):
+        self.write_message('MAP', {"layer": layer })
+        return self.read_response()
+
     def write_message(self, action, data=None):
         if action in RemoteProcessClient.ACTION:
             self.write_uint(RemoteProcessClient.ACTION[action])
