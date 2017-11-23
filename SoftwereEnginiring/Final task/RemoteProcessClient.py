@@ -15,7 +15,7 @@ fh.setLevel(logging.DEBUG)
 
 # create console handler and set level to debug
 ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
+ch.setLevel(logging.ERROR)
 
 # create formatter and add it to the handlers
 formatter = logging.Formatter(
@@ -60,7 +60,7 @@ class RemoteProcessClient:
         return self.write_message('LOGIN', {"name": name})
 
     def logout(self):
-        return self.write_message('LOGOUT')
+        self.write_message('LOGOUT')
 
     def move(self, move):
         return self.write_message('MOVE', {"line_idx": move.line_idx, "speed": move.speed, "train_idx": move.train_idx})
@@ -80,7 +80,8 @@ class RemoteProcessClient:
             raise ValueError("Received wrong action=%s" % action)
         self.write_string(json.dumps(data))
         logger.info("Loging message: %s", data)
-        return self.read_response()
+        if action != 'LOGOUT':
+            return self.read_response()
 
     def read_response(self):
         result = self.read_uint()
