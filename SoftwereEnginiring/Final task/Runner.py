@@ -1,7 +1,6 @@
 import sys
 from time import sleep
-
-#from Strategy import Strategy
+# from Strategy import Strategy
 from RemoteProcessClient import RemoteProcessClient
 
 
@@ -12,18 +11,20 @@ class Runner:
             self.name = sys.argv[3]
         else:
             self.remote_process_client = RemoteProcessClient('wgforge-srv.wargaming.net', 443)
-            self.name = "Mickey"
-
+            self.name = "Rickey"
 
     def run(self):
         try:
             self.remote_process_client.login(self.name)
-            #strategy = Strategy()
+            # strategy = Strategy()
             self.remote_process_client.move(1, 1, 0)
             for i in range(10):
-                response = self.remote_process_client.map(1)
-                print("Position - ", response[1]["train"][0]["position"])
+                world = self.remote_process_client.read_world()
+                print("Position - ", world.trains[0]["position"])
                 self.remote_process_client.turn()
+
+                # move = Move()
+                # strategy.move(world, game, move)
             self.remote_process_client.logout()
         finally:
             self.remote_process_client.close()
