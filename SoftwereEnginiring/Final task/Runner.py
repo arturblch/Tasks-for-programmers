@@ -15,39 +15,16 @@ class Runner:
             self.name = "Mickey"
 
 
-
-    def login(self, name):
-        self.remote_process_client.write_message('LOGIN', {"name" : name})
-        return self.remote_process_client.read_response()
-
-
-    def logout(self):
-        self.remote_process_client.write_message('LOGOUT')
-        return self.remote_process_client.read_response()
-
-    def move(self, line_idx, speed, train_idx):
-        self.remote_process_client.write_message('MOVE', {"line_idx": line_idx, "speed": speed, "train_idx": train_idx})
-        return self.remote_process_client.read_response()
-
-    def turn(self):
-        self.remote_process_client.write_message('TURN')
-        return self.remote_process_client.read_response()
-
-    def map(self, layer):
-        self.remote_process_client.write_message('MAP', {"layer": layer })
-        return self.remote_process_client.read_response()
-
-
     def run(self):
         try:
-            self.login(self.name)
+            self.remote_process_client.login(self.name)
             #strategy = Strategy()
-            self.move(1, 1, 0)
+            self.remote_process_client.move(1, 1, 0)
             for i in range(10):
-                data = self.map(1)
-                print("Position - ", data[1]["train"][0]["position"])
-                self.turn()
-            self.logout()
+                response = self.remote_process_client.map(1)
+                print("Position - ", response[1]["train"][0]["position"])
+                self.remote_process_client.turn()
+            self.remote_process_client.logout()
         finally:
             self.remote_process_client.close()
 
