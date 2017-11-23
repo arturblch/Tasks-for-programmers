@@ -18,7 +18,7 @@ class Runner:
             start_data = self.remote_process_client.login(self.name)
             game = self.remote_process_client.read_game()
 
-            strategy = Strategy(start_data)
+            strategy = Strategy(start_data[1])
 
             for _ in range(30):                                 # 30 ticks
                 world = self.remote_process_client.read_world()

@@ -5,15 +5,15 @@ from model.Move import Move
 
 class Strategy:
     def __init__(self, start_data):
-        self.home_post = start_data["home"]["post_id"]
         self.ready_list = []
+        self.home = start_data["home"]["idx"]
 
     def move(self, world: World, game: Game):
         for train in world.trains:
-        # в оконечной точке 10 hardcode
-            if (train["position"] == None or    # start game
-                train["position"] == 10 or      # p1 from line
-                train["position"] == 0):        # p0 from line
+            # в оконечной точке 10 hardcode
+            if (train["position"] == None or  # start game
+                    train["position"] == 10 or  # p1 from line
+                    train["position"] == 0):  # p0 from line
                 self.ready_list.append(train["idx"])
 
         if len(self.ready_list):
@@ -25,9 +25,8 @@ class Strategy:
 
             if train:
                 next_line = self.get_next_line(train, game)
-                return Move(line_idx=next_line,
-                            speed=1,
-                            train_idx=train["idx"])
+                return Move(
+                    line_idx=next_line, speed=1, train_idx=train["idx"])
 
         # some logic
 
@@ -35,12 +34,16 @@ class Strategy:
 
     def get_next_line(self, train, game):
         line = self._get_line(train["line_idx"], game)
+
+        if line == None:
+            point = self.home
+        else:
             # Хитрое упрощение, логическая переменная подставляеться как индекс списка
-        point = line["point"][train["position"] == line["length"]]
+            point = line["point"][train["position"] == line["length"]]
 
         possible_lines = self._find_lines_at_point(point, game)
         if possible_lines:
-            return possible_lines[0]
+            return possible_lines[-1]
 
     def _find_lines_at_point(self, point_idx, game):
         lines = []
