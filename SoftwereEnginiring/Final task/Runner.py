@@ -11,12 +11,16 @@ class Runner:
             self.name = sys.argv[3]
         else:
             self.remote_process_client = RemoteProcessClient('wgforge-srv.wargaming.net', 443)
-            self.name = "Rickey"
+            self.name = "Mickey"
 
     def run(self):
         try:
             self.remote_process_client.login(self.name)
+            game = self.remote_process_client.read_game()
+
             # strategy = Strategy()
+
+            # STRATEGY
             self.remote_process_client.move(1, 1, 0)
             for i in range(10):
                 world = self.remote_process_client.read_world()
@@ -25,6 +29,9 @@ class Runner:
 
                 # move = Move()
                 # strategy.move(world, game, move)
+                # self.remote_process_client.write_move_message(move)
+            # STRATEGY
+
             self.remote_process_client.logout()
         finally:
             self.remote_process_client.close()

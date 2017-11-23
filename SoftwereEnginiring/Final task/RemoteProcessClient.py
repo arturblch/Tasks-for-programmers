@@ -3,6 +3,7 @@ import struct
 import json
 import logging
 from model.World import World
+from model.Game import Game
 
 # create logger
 logger = logging.getLogger('RemouteClient')
@@ -137,6 +138,8 @@ class RemoteProcessClient:
 
     def read_world(self):
         layer = self.write_message('MAP', {"layer": 1})[1]
-        posts = layer['post']
-        trains = layer['train']
-        return World(posts, trains)
+        return World(posts=layer['post'], trains=layer['train'])
+
+    def read_game(self):
+        layer = self.write_message('MAP', {"layer": 0})[1]
+        return Game(lines=layer['line'], points=layer['point'])
