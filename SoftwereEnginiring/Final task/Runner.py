@@ -15,18 +15,16 @@ class Runner:
 
     def run(self):
         try:
-            start_data = self.remote_process_client.login(self.name)
+            self.remote_process_client.login(self.name)
             game = self.remote_process_client.read_game()
+            strategy = Strategy()
 
-            strategy = Strategy(start_data)
-
-            for _ in range(30):                                 # 30 ticks
+            while True:
                 world = self.remote_process_client.read_world()
-
                 next_move = strategy.move(world, game)
-                if next_move:
-                    self.remote_process_client.move(next_move)
-                self.remote_process_client.turn()
+                if next_move is None:
+                    break
+                self.remote_process_client.write_message(*next_move)
 
             self.remote_process_client.logout()
         finally:
