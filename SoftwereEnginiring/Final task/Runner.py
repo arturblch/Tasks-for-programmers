@@ -19,7 +19,7 @@ class Runner:
     def login(self, name):
         self.remote_process_client.write_message('LOGIN', {"name" : name})
         return self.remote_process_client.read_response()
-        
+
 
     def logout(self):
         self.remote_process_client.write_message('LOGOUT')
@@ -28,7 +28,7 @@ class Runner:
     def move(self, line_idx, speed, train_idx):
         self.remote_process_client.write_message('MOVE', {"line_idx": line_idx, "speed": speed, "train_idx": train_idx})
         return self.remote_process_client.read_response()
-    
+
     def turn(self):
         self.remote_process_client.write_message('TURN')
         return self.remote_process_client.read_response()
@@ -46,7 +46,7 @@ class Runner:
             for i in range(10):
                 data = self.map(1)
                 print("Position - ", data[1]["train"][0]["position"])
-                sleep(1)
+                self.turn()
             self.logout()
         finally:
             self.remote_process_client.close()
