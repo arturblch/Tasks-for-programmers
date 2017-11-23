@@ -2,6 +2,7 @@ import socket
 import struct
 import json
 import logging
+from model.World import World
 
 # create logger
 logger = logging.getLogger('RemouteClient')
@@ -27,7 +28,6 @@ logger.addHandler(ch)
 
 
 class RemoteProcessClient:
-    BUFFER_SIZE_BYTES = 1 << 20
     BYTE_ORDER_FORMAT_STRING = "<"
 
     BYTE_FORMAT_STRING = BYTE_ORDER_FORMAT_STRING + "b"
@@ -47,7 +47,7 @@ class RemoteProcessClient:
     }
 
     def __init__(self, host, port):
-        self.socket = socket.socket()
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         logger.info("Create socket")
         self.socket.connect((host, port))
         logger.info("Connection done")
@@ -64,6 +64,7 @@ class RemoteProcessClient:
             raise ValueError("Received wrong action=%s" % action)
         self.write_string(json.dumps(data))
         logger.info("Loging message: %s", data)
+        return self.read_response()
 
     def read_response(self):
         result = self.read_uint()
@@ -119,3 +120,9 @@ class RemoteProcessClient:
 
     def write_bytes(self, byte_array):
         self.socket.sendall(byte_array)
+
+    def read_world(self):
+        layer = self.write_message('MAP', {"layer": 1})[1]
+        posts = layer['post']
+        trains = layer['train']
+        return World(posts, trains)

@@ -1,71 +1,437 @@
-2017-11-23 00:10:14,219 - RemouteClient - INFO - Create socket
-2017-11-23 00:10:14,282 - RemouteClient - INFO - Connection done
-2017-11-23 00:10:14,283 - RemouteClient - INFO - Action: LOGIN
-2017-11-23 00:10:14,284 - RemouteClient - INFO - Loging message: {'name': 'Test_Conway'}
-2017-11-23 00:10:14,331 - RemouteClient - INFO - len byte_array - 4
-2017-11-23 00:10:14,332 - RemouteClient - INFO - len byte_array - 4
-2017-11-23 00:10:14,332 - RemouteClient - INFO - Result code: 0
-2017-11-23 00:10:14,332 - RemouteClient - INFO - Data: {
-    "home": null,
-    "idx": "d33f0ea2-3c34-497f-9e3b-f68a827286b8",
-    "name": "Test_Conway",
-    "train": []
+2017-11-23 12:29:44,882 - RemouteClient - INFO - Create socket
+2017-11-23 12:29:44,920 - RemouteClient - INFO - Connection done
+2017-11-23 12:29:44,920 - RemouteClient - INFO - Action: LOGIN
+2017-11-23 12:29:44,921 - RemouteClient - INFO - Loging message: {'name': 'Rickey'}
+2017-11-23 12:29:44,989 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:45,221 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:45,222 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:45,222 - RemouteClient - INFO - Data: {
+    "home": {
+        "idx": 1,
+        "post_id": 1
+    },
+    "idx": "1867fde9-5c0d-4db8-9b71-e0145832e4d4",
+    "name": "Rickey",
+    "train": [
+        {
+            "capacity": 15,
+            "idx": 0,
+            "line_idx": null,
+            "player_id": "1867fde9-5c0d-4db8-9b71-e0145832e4d4",
+            "position": null,
+            "product": 0,
+            "speed": 0
+        }
+    ]
 }
-2017-11-23 00:10:14,334 - RemouteClient - INFO - Close socket
-2017-11-23 00:10:14,337 - RemouteClient - INFO - Create socket
-2017-11-23 00:10:14,371 - RemouteClient - INFO - Connection done
-2017-11-23 00:10:14,372 - RemouteClient - INFO - Action: LOGIN
-2017-11-23 00:10:14,373 - RemouteClient - INFO - Loging message: {'name': 'Test'}
-2017-11-23 00:10:14,408 - RemouteClient - INFO - len byte_array - 4
-2017-11-23 00:10:14,442 - RemouteClient - INFO - len byte_array - 4
-2017-11-23 00:10:14,442 - RemouteClient - INFO - Result code: 0
-2017-11-23 00:10:14,442 - RemouteClient - INFO - Data: {
-    "home": null,
-    "idx": "57399c40-b5d4-49bd-b652-61d4ba2085ae",
-    "name": "Test",
-    "train": []
+2017-11-23 12:29:45,222 - RemouteClient - INFO - Action: MOVE
+2017-11-23 12:29:45,222 - RemouteClient - INFO - Loging message: {'line_idx': 1, 'speed': 1, 'train_idx': 0}
+2017-11-23 12:29:45,341 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:45,582 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:45,582 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:45,582 - RemouteClient - INFO - Action: TURN
+2017-11-23 12:29:45,583 - RemouteClient - INFO - Loging message: None
+2017-11-23 12:29:45,689 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:45,914 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:45,914 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:45,915 - RemouteClient - INFO - Action: MAP
+2017-11-23 12:29:45,915 - RemouteClient - INFO - Loging message: {'layer': 1}
+2017-11-23 12:29:46,021 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:46,257 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:46,257 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:46,257 - RemouteClient - INFO - Data: {
+    "idx": 1,
+    "post": [
+        {
+            "armor": 0,
+            "idx": 1,
+            "name": "town-one",
+            "population": 10,
+            "product": 0,
+            "type": 1
+        },
+        {
+            "idx": 2,
+            "name": "market-one",
+            "product": 20,
+            "type": 2
+        }
+    ],
+    "train": [
+        {
+            "capacity": 15,
+            "idx": 0,
+            "line_idx": 1,
+            "player_id": "1867fde9-5c0d-4db8-9b71-e0145832e4d4",
+            "position": 1,
+            "product": 0,
+            "speed": 1
+        }
+    ]
 }
-2017-11-23 00:10:19,542 - RemouteClient - INFO - Close socket
-2017-11-23 00:12:39,058 - RemouteClient - INFO - Create socket
-2017-11-23 00:12:39,097 - RemouteClient - INFO - Connection done
-2017-11-23 00:12:39,098 - RemouteClient - INFO - Action: LOGIN
-2017-11-23 00:12:39,099 - RemouteClient - INFO - Loging message: {'name': 'Test_Conway'}
-2017-11-23 00:12:39,136 - RemouteClient - INFO - len byte_array - 4
-2017-11-23 00:12:39,173 - RemouteClient - INFO - len byte_array - 4
-2017-11-23 00:12:39,173 - RemouteClient - INFO - Result code: 0
-2017-11-23 00:12:39,173 - RemouteClient - INFO - Data: {
-    "home": null,
-    "idx": "d33f0ea2-3c34-497f-9e3b-f68a827286b8",
-    "name": "Test_Conway",
-    "train": []
+2017-11-23 12:29:46,258 - RemouteClient - INFO - Action: TURN
+2017-11-23 12:29:46,258 - RemouteClient - INFO - Loging message: None
+2017-11-23 12:29:46,364 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:46,364 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:46,364 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:46,365 - RemouteClient - INFO - Action: MAP
+2017-11-23 12:29:46,365 - RemouteClient - INFO - Loging message: {'layer': 1}
+2017-11-23 12:29:46,485 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:46,720 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:46,720 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:46,720 - RemouteClient - INFO - Data: {
+    "idx": 1,
+    "post": [
+        {
+            "armor": 0,
+            "idx": 1,
+            "name": "town-one",
+            "population": 10,
+            "product": 0,
+            "type": 1
+        },
+        {
+            "idx": 2,
+            "name": "market-one",
+            "product": 20,
+            "type": 2
+        }
+    ],
+    "train": [
+        {
+            "capacity": 15,
+            "idx": 0,
+            "line_idx": 1,
+            "player_id": "1867fde9-5c0d-4db8-9b71-e0145832e4d4",
+            "position": 2,
+            "product": 0,
+            "speed": 1
+        }
+    ]
 }
-2017-11-23 00:12:39,175 - RemouteClient - INFO - Close socket
-2017-11-23 00:12:39,177 - RemouteClient - INFO - Create socket
-2017-11-23 00:12:39,215 - RemouteClient - INFO - Connection done
-2017-11-23 00:12:39,216 - RemouteClient - INFO - Action: LOGIN
-2017-11-23 00:12:39,217 - RemouteClient - INFO - Loging message: {'name': 'Test'}
-2017-11-23 00:12:39,251 - RemouteClient - INFO - len byte_array - 4
-2017-11-23 00:12:39,286 - RemouteClient - INFO - len byte_array - 4
-2017-11-23 00:12:39,286 - RemouteClient - INFO - Result code: 0
-2017-11-23 00:12:39,286 - RemouteClient - INFO - Data: {
-    "home": null,
-    "idx": "57399c40-b5d4-49bd-b652-61d4ba2085ae",
-    "name": "Test",
-    "train": []
+2017-11-23 12:29:46,721 - RemouteClient - INFO - Action: TURN
+2017-11-23 12:29:46,721 - RemouteClient - INFO - Loging message: None
+2017-11-23 12:29:46,827 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:47,053 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:47,053 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:47,053 - RemouteClient - INFO - Action: MAP
+2017-11-23 12:29:47,054 - RemouteClient - INFO - Loging message: {'layer': 1}
+2017-11-23 12:29:47,160 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:47,395 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:47,395 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:47,395 - RemouteClient - INFO - Data: {
+    "idx": 1,
+    "post": [
+        {
+            "armor": 0,
+            "idx": 1,
+            "name": "town-one",
+            "population": 10,
+            "product": 0,
+            "type": 1
+        },
+        {
+            "idx": 2,
+            "name": "market-one",
+            "product": 20,
+            "type": 2
+        }
+    ],
+    "train": [
+        {
+            "capacity": 15,
+            "idx": 0,
+            "line_idx": 1,
+            "player_id": "1867fde9-5c0d-4db8-9b71-e0145832e4d4",
+            "position": 3,
+            "product": 0,
+            "speed": 1
+        }
+    ]
 }
-2017-11-23 00:12:39,287 - RemouteClient - INFO - Action: MOVE
-2017-11-23 00:12:39,287 - RemouteClient - INFO - Loging message: {'line_idx': 1, 'speed': 1, 'train_idx': 0}
-2017-11-23 00:12:39,327 - RemouteClient - INFO - len byte_array - 4
-2017-11-23 00:12:39,327 - RemouteClient - INFO - len byte_array - 4
-2017-11-23 00:12:39,328 - RemouteClient - INFO - Result code: 0
-2017-11-23 00:12:39,328 - RemouteClient - INFO - Action: TURN
-2017-11-23 00:12:39,328 - RemouteClient - INFO - Loging message: None
-2017-11-23 00:12:39,401 - RemouteClient - INFO - len byte_array - 4
-2017-11-23 00:12:39,441 - RemouteClient - INFO - len byte_array - 4
-2017-11-23 00:12:39,441 - RemouteClient - INFO - Result code: 0
-2017-11-23 00:12:39,441 - RemouteClient - INFO - Action: LOGOUT
-2017-11-23 00:12:39,442 - RemouteClient - INFO - Loging message: None
-2017-11-23 00:12:39,477 - RemouteClient - INFO - len byte_array - 4
-2017-11-23 00:12:39,478 - RemouteClient - INFO - len byte_array - 4
-2017-11-23 00:12:39,478 - RemouteClient - INFO - Result code: 0
-2017-11-23 00:12:39,479 - RemouteClient - INFO - Close socket
+2017-11-23 12:29:47,396 - RemouteClient - INFO - Action: TURN
+2017-11-23 12:29:47,396 - RemouteClient - INFO - Loging message: None
+2017-11-23 12:29:47,502 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:47,738 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:47,738 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:47,738 - RemouteClient - INFO - Action: MAP
+2017-11-23 12:29:47,739 - RemouteClient - INFO - Loging message: {'layer': 1}
+2017-11-23 12:29:47,845 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:48,077 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:48,078 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:48,078 - RemouteClient - INFO - Data: {
+    "idx": 1,
+    "post": [
+        {
+            "armor": 0,
+            "idx": 1,
+            "name": "town-one",
+            "population": 10,
+            "product": 0,
+            "type": 1
+        },
+        {
+            "idx": 2,
+            "name": "market-one",
+            "product": 20,
+            "type": 2
+        }
+    ],
+    "train": [
+        {
+            "capacity": 15,
+            "idx": 0,
+            "line_idx": 1,
+            "player_id": "1867fde9-5c0d-4db8-9b71-e0145832e4d4",
+            "position": 4,
+            "product": 0,
+            "speed": 1
+        }
+    ]
+}
+2017-11-23 12:29:48,078 - RemouteClient - INFO - Action: TURN
+2017-11-23 12:29:48,078 - RemouteClient - INFO - Loging message: None
+2017-11-23 12:29:48,184 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:48,420 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:48,420 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:48,421 - RemouteClient - INFO - Action: MAP
+2017-11-23 12:29:48,421 - RemouteClient - INFO - Loging message: {'layer': 1}
+2017-11-23 12:29:48,527 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:48,753 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:48,753 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:48,753 - RemouteClient - INFO - Data: {
+    "idx": 1,
+    "post": [
+        {
+            "armor": 0,
+            "idx": 1,
+            "name": "town-one",
+            "population": 10,
+            "product": 0,
+            "type": 1
+        },
+        {
+            "idx": 2,
+            "name": "market-one",
+            "product": 20,
+            "type": 2
+        }
+    ],
+    "train": [
+        {
+            "capacity": 15,
+            "idx": 0,
+            "line_idx": 1,
+            "player_id": "1867fde9-5c0d-4db8-9b71-e0145832e4d4",
+            "position": 5,
+            "product": 0,
+            "speed": 1
+        }
+    ]
+}
+2017-11-23 12:29:48,754 - RemouteClient - INFO - Action: TURN
+2017-11-23 12:29:48,754 - RemouteClient - INFO - Loging message: None
+2017-11-23 12:29:48,859 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:49,086 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:49,086 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:49,086 - RemouteClient - INFO - Action: MAP
+2017-11-23 12:29:49,087 - RemouteClient - INFO - Loging message: {'layer': 1}
+2017-11-23 12:29:49,193 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:49,429 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:49,429 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:49,429 - RemouteClient - INFO - Data: {
+    "idx": 1,
+    "post": [
+        {
+            "armor": 0,
+            "idx": 1,
+            "name": "town-one",
+            "population": 10,
+            "product": 0,
+            "type": 1
+        },
+        {
+            "idx": 2,
+            "name": "market-one",
+            "product": 20,
+            "type": 2
+        }
+    ],
+    "train": [
+        {
+            "capacity": 15,
+            "idx": 0,
+            "line_idx": 1,
+            "player_id": "1867fde9-5c0d-4db8-9b71-e0145832e4d4",
+            "position": 6,
+            "product": 0,
+            "speed": 1
+        }
+    ]
+}
+2017-11-23 12:29:49,430 - RemouteClient - INFO - Action: TURN
+2017-11-23 12:29:49,430 - RemouteClient - INFO - Loging message: None
+2017-11-23 12:29:49,536 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:49,537 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:49,537 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:49,538 - RemouteClient - INFO - Action: MAP
+2017-11-23 12:29:49,538 - RemouteClient - INFO - Loging message: {'layer': 1}
+2017-11-23 12:29:49,659 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:49,892 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:49,892 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:49,892 - RemouteClient - INFO - Data: {
+    "idx": 1,
+    "post": [
+        {
+            "armor": 0,
+            "idx": 1,
+            "name": "town-one",
+            "population": 10,
+            "product": 0,
+            "type": 1
+        },
+        {
+            "idx": 2,
+            "name": "market-one",
+            "product": 20,
+            "type": 2
+        }
+    ],
+    "train": [
+        {
+            "capacity": 15,
+            "idx": 0,
+            "line_idx": 1,
+            "player_id": "1867fde9-5c0d-4db8-9b71-e0145832e4d4",
+            "position": 7,
+            "product": 0,
+            "speed": 1
+        }
+    ]
+}
+2017-11-23 12:29:49,893 - RemouteClient - INFO - Action: TURN
+2017-11-23 12:29:49,893 - RemouteClient - INFO - Loging message: None
+2017-11-23 12:29:49,999 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:50,232 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:50,232 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:50,233 - RemouteClient - INFO - Action: MAP
+2017-11-23 12:29:50,233 - RemouteClient - INFO - Loging message: {'layer': 1}
+2017-11-23 12:29:50,339 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:50,565 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:50,565 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:50,565 - RemouteClient - INFO - Data: {
+    "idx": 1,
+    "post": [
+        {
+            "armor": 0,
+            "idx": 1,
+            "name": "town-one",
+            "population": 10,
+            "product": 0,
+            "type": 1
+        },
+        {
+            "idx": 2,
+            "name": "market-one",
+            "product": 20,
+            "type": 2
+        }
+    ],
+    "train": [
+        {
+            "capacity": 15,
+            "idx": 0,
+            "line_idx": 1,
+            "player_id": "1867fde9-5c0d-4db8-9b71-e0145832e4d4",
+            "position": 8,
+            "product": 0,
+            "speed": 1
+        }
+    ]
+}
+2017-11-23 12:29:50,566 - RemouteClient - INFO - Action: TURN
+2017-11-23 12:29:50,566 - RemouteClient - INFO - Loging message: None
+2017-11-23 12:29:50,673 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:50,908 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:50,908 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:50,908 - RemouteClient - INFO - Action: MAP
+2017-11-23 12:29:50,909 - RemouteClient - INFO - Loging message: {'layer': 1}
+2017-11-23 12:29:51,015 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:51,251 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:51,251 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:51,251 - RemouteClient - INFO - Data: {
+    "idx": 1,
+    "post": [
+        {
+            "armor": 0,
+            "idx": 1,
+            "name": "town-one",
+            "population": 10,
+            "product": 0,
+            "type": 1
+        },
+        {
+            "idx": 2,
+            "name": "market-one",
+            "product": 20,
+            "type": 2
+        }
+    ],
+    "train": [
+        {
+            "capacity": 15,
+            "idx": 0,
+            "line_idx": 1,
+            "player_id": "1867fde9-5c0d-4db8-9b71-e0145832e4d4",
+            "position": 9,
+            "product": 0,
+            "speed": 1
+        }
+    ]
+}
+2017-11-23 12:29:51,252 - RemouteClient - INFO - Action: TURN
+2017-11-23 12:29:51,252 - RemouteClient - INFO - Loging message: None
+2017-11-23 12:29:51,358 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:51,584 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:51,584 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:51,584 - RemouteClient - INFO - Action: MAP
+2017-11-23 12:29:51,584 - RemouteClient - INFO - Loging message: {'layer': 1}
+2017-11-23 12:29:51,691 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:51,926 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:51,926 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:51,926 - RemouteClient - INFO - Data: {
+    "idx": 1,
+    "post": [
+        {
+            "armor": 0,
+            "idx": 1,
+            "name": "town-one",
+            "population": 10,
+            "product": 0,
+            "type": 1
+        },
+        {
+            "idx": 2,
+            "name": "market-one",
+            "product": 20,
+            "type": 2
+        }
+    ],
+    "train": [
+        {
+            "capacity": 15,
+            "idx": 0,
+            "line_idx": 1,
+            "player_id": "1867fde9-5c0d-4db8-9b71-e0145832e4d4",
+            "position": 10,
+            "product": 15,
+            "speed": 0
+        }
+    ]
+}
+2017-11-23 12:29:51,927 - RemouteClient - INFO - Action: LOGOUT
+2017-11-23 12:29:51,927 - RemouteClient - INFO - Loging message: None
+2017-11-23 12:29:51,960 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:51,961 - RemouteClient - INFO - len byte_array - 4
+2017-11-23 12:29:51,961 - RemouteClient - INFO - Result code: 0
+2017-11-23 12:29:51,961 - RemouteClient - INFO - Close socket
