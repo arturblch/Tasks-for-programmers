@@ -222,7 +222,7 @@ def test_defult():
     next_move = strategy.move(world, game)
 
     print(next_move)
-    test_move = Move(1,1,0)
+    test_move = Move(12,1,0)
     assert next_move.line_idx == test_move.line_idx
     assert next_move.speed == test_move.speed
     assert next_move.train_idx == test_move.train_idx
