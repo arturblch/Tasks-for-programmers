@@ -1,6 +1,7 @@
 import sys
 from time import sleep
-# from Strategy import Strategy
+from Strategy import Strategy
+from model.Move import Move
 from RemoteProcessClient import RemoteProcessClient
 
 
@@ -18,19 +19,14 @@ class Runner:
             self.remote_process_client.login(self.name)
             game = self.remote_process_client.read_game()
 
-            # strategy = Strategy()
+            strategy = Strategy()
 
-            # STRATEGY
-            self.remote_process_client.move(1, 1, 0)
-            for i in range(10):
+            for _ in range(30):
                 world = self.remote_process_client.read_world()
-                print("Position - ", world.trains[0]["position"])
-                self.remote_process_client.turn()
 
-                # move = Move()
-                # strategy.move(world, game, move)
-                # self.remote_process_client.write_move_message(move)
-            # STRATEGY
+                next_move = strategy.move(world, game)
+                self.remote_process_client.move(next_move)
+                self.remote_process_client.turn()
 
             self.remote_process_client.logout()
         finally:

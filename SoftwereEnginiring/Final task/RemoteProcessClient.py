@@ -62,8 +62,8 @@ class RemoteProcessClient:
     def logout(self):
         return self.write_message('LOGOUT')
 
-    def move(self, line_idx, speed, train_idx):
-        return self.write_message('MOVE', {"line_idx": line_idx, "speed": speed, "train_idx": train_idx})
+    def move(self, move):
+        return self.write_message('MOVE', {"line_idx": move.line_idx, "speed": move.speed, "train_idx": move.train_idx})
 
     def turn(self):
         return self.write_message('TURN')
