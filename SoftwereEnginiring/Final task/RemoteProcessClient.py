@@ -98,7 +98,6 @@ class RemoteProcessClient:
     def read_uint(self):
         byte_array = self.read_bytes(
             RemoteProcessClient.UNSIGNED_INTEGER_SIZE_BYTES)
-        logger.info("len byte_array - %d", len(byte_array))
         return struct.unpack(RemoteProcessClient.UNSIGNED_INT_FORMAT_STRING,
                              byte_array)[0]
 
