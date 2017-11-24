@@ -228,4 +228,3 @@ def test_defult():
     assert next_move.train_idx == test_move.train_idx
 
 
-test_defult()
