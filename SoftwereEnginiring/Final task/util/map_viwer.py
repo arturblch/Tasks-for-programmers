@@ -196,7 +196,7 @@ G.add_edges_from([line.pop('point')+[line,] for line in game_responce["line"]])
 pos = nx.spectral_layout(G)
 
 nx.draw_networkx_nodes(G, pos, node_color='k')
-nx.draw_networkx_labels(G, pos, font_color='W')
-nx.draw_networkx_edges(G, pos, width=1.0, alpha=0.5, edge_color="k")
+nx.draw_networkx_labels(G, pos, font_color='w')
+nx.draw_networkx_edges(G, pos, width=1.0, edge_color="k")
 
 plt.show()
