@@ -1,25 +1,34 @@
-import pytest
+import networkx as nx
+import matplotlib.pyplot as plt
 import json
-from Strategy import Strategy
-from model.World import World
-from model.Game import Game
-from model.Move import Move
+G = nx.Graph()
 
-start_data = json.loads(
-    '''{
-    "home": {
-        "idx": 1,
-        "post_id": 1
-    },
-    "idx": "dcdfdf83-cbcf-4cec-8ad8-c919c7f6781d",
-    "name": "Mickey",
+world_responce = json.loads(
+'''{
+    "idx": 1,
+    "post": [
+        {
+            "armor": 0,
+            "idx": 1,
+            "name": "town-one",
+            "population": 10,
+            "product": 0,
+            "type": 1
+        },
+        {
+            "idx": 2,
+            "name": "market-one",
+            "product": 20,
+            "type": 2
+        }
+    ],
     "train": [
         {
             "capacity": 15,
             "idx": 0,
-            "line_idx": null,
+            "line_idx": 1,
             "player_id": "dcdfdf83-cbcf-4cec-8ad8-c919c7f6781d",
-            "position": null,
+            "position": 10,
             "product": 0,
             "speed": 0
         }
@@ -180,51 +189,14 @@ game_responce = json.loads(
      ]
  }''')
 
-world_responce = json.loads(
-'''{
-    "idx": 1,
-    "post": [
-        {
-            "armor": 0,
-            "idx": 1,
-            "name": "town-one",
-            "population": 10,
-            "product": 0,
-            "type": 1
-        },
-        {
-            "idx": 2,
-            "name": "market-one",
-            "product": 20,
-            "type": 2
-        }
-    ],
-    "train": [
-        {
-            "capacity": 15,
-            "idx": 0,
-            "line_idx": 1,
-            "player_id": "dcdfdf83-cbcf-4cec-8ad8-c919c7f6781d",
-            "position": 10,
-            "product": 0,
-            "speed": 0
-        }
-    ]
-}''')
 
+G.add_nodes_from([(point.pop('idx'),point) for point in game_responce["point"]])
+G.add_edges_from([line.pop('point')+[line,] for line in game_responce["line"]])
 
-world = World(posts=world_responce['post'], trains=world_responce['train'])
-game = Game(lines=game_responce['line'], points=game_responce['point'])
+pos = nx.spectral_layout(G, weight="length")
 
-def test_defult():
+nx.draw_networkx_nodes(G, pos, node_color='k')
+nx.draw_networkx_labels(G, pos, font_color='w')
+nx.draw_networkx_edges(G, pos, width=1.0, edge_color="k")
 
-    strategy = Strategy(start_data)
-    next_move = strategy.move(world, game)
-
-    print(next_move)
-    test_move = Move(12,1,0)
-    assert next_move.line_idx == test_move.line_idx
-    assert next_move.speed == test_move.speed
-    assert next_move.train_idx == test_move.train_idx
-
-
+plt.show()
