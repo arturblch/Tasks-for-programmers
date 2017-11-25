@@ -3,9 +3,9 @@ import struct
 import json
 import logging
 import networkx as nx
-from model.World import World
 from model.Move import Move
 from model.Post import Post
+from model.Train import Train
 
 # create logger
 logger = logging.getLogger('RemouteClient')
@@ -132,11 +132,16 @@ class RemoteProcessClient:
 
     def read_world(self):
         layer = self.write_message('MAP', {"layer": 1})[1]
-        return World(posts=layer['post'], trains=layer['train'])
+        posts = {post['idx']: Post(**post) for post in layer['post']}
+        trains = {train['idx']: Train(**train) for train in layer['train']}
+        return posts, trains
 
-    def update_world(self, world):
-        update = self.read_world()
-        world.update(update)
+    def update_world(self, trains):
+        update = self.write_message('MAP', {"layer": 1})[1]
+        posts = {post['idx']: Post(**post) for post in update['post']}
+        for train in update['train']:
+            trains[train['idx']].update(**train)
+        return posts, trains
 
     def read_graph(self):
         layer = self.write_message('MAP', {"layer": 0})[1]

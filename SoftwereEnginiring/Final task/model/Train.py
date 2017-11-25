@@ -12,11 +12,9 @@ class Train:
         self.current_point = None
 
     def departure(self, departure_point, arrival_point):
-        print(1234124)
         self.current_point = None
         self.departure_point = departure_point
         self.arrival_point = arrival_point
-        print('dep', self.departure_point, self.arrival_point)
 
     def arrival(self):
         self.current_point = self.arrival_point
@@ -31,6 +29,3 @@ class Train:
         self.position = position
         self.product = product
         self.speed = speed
-
-    def __repr__(self):
-        return '{} {}'.format(self.speed, self.line_idx)
