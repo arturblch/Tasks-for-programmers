@@ -1,5 +1,4 @@
 import sys
-from time import sleep
 from Strategy import Strategy
 from RemoteProcessClient import RemoteProcessClient
 
@@ -16,17 +15,18 @@ class Runner:
     def run(self):
         try:
             self.remote_process_client.login(self.name)
-            game = self.remote_process_client.read_game()
-            strategy = Strategy()
-
-            while True:
-                world = self.remote_process_client.read_world()
-                next_move = strategy.move(world, game)
-                if next_move is None:
-                    break
-                self.remote_process_client.write_message(*next_move)
-
-            self.remote_process_client.logout()
+            try:
+                graph = self.remote_process_client.read_graph()
+                strategy = Strategy()
+                while strategy.in_progress:
+                    world = self.remote_process_client.read_world()
+                    moves = strategy.get_moves(world, graph)
+                    if moves:
+                        for move in moves:
+                            self.remote_process_client.move(move)
+                    self.remote_process_client.turn()
+            finally:
+                self.remote_process_client.logout()
         finally:
             self.remote_process_client.close()
 

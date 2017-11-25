@@ -2,8 +2,9 @@ import socket
 import struct
 import json
 import logging
+import networkx as nx
 from model.World import World
-from model.Game import Game
+from model.Move import Move
 
 # create logger
 logger = logging.getLogger('RemouteClient')
@@ -62,7 +63,7 @@ class RemoteProcessClient:
     def logout(self):
         return self.write_message('LOGOUT')
 
-    def move(self, move):
+    def move(self, move: Move):
         return self.write_message('MOVE', {"line_idx": move.line_idx, "speed": move.speed, "train_idx": move.train_idx})
 
     def turn(self):
@@ -140,6 +141,14 @@ class RemoteProcessClient:
         layer = self.write_message('MAP', {"layer": 1})[1]
         return World(posts=layer['post'], trains=layer['train'])
 
-    def read_game(self):
+    def read_graph(self):
         layer = self.write_message('MAP', {"layer": 0})[1]
-        return Game(lines=layer['line'], points=layer['point'])
+        return self.build_graph(layer)
+
+    def build_graph(self, layer):
+        graph = nx.Graph()
+        for point in layer['point']:
+            graph.add_node(point['idx'], post_id=point['post_id'])
+        for line in layer['line']:
+            graph.add_edge(*line['point'], idx=line['idx'], length=line['length'])
+        return graph
