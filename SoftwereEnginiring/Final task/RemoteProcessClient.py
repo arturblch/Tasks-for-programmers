@@ -40,14 +40,6 @@ class RemoteProcessClient:
 
     ACTION = {"LOGIN": 1, "LOGOUT": 2, "MOVE": 3, "TURN": 5, "MAP": 10}
 
-    RESULT = {
-        "OKEY": 0,
-        "BAD_COMMAND": 1,
-        "RESOURCE_NOT_FOUND": 2,
-        "PATH_NOT_FOUND": 3,
-        "ACCESS_DENIED": 5
-    }
-
     def __init__(self, host, port):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         logger.info("Create socket")

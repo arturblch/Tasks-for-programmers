@@ -1,6 +1,7 @@
 import sys
 from Strategy import Strategy
 from RemoteProcessClient import RemoteProcessClient
+from model.StatusCode import StatusCode
 
 
 class Runner:
@@ -14,19 +15,21 @@ class Runner:
 
     def run(self):
         try:
-            self.remote_process_client.login(self.name)
-            try:
-                graph = self.remote_process_client.read_graph()
-                strategy = Strategy()
-                while strategy.in_progress:
+            status, player_data = self.remote_process_client.login(self.name)
+            if status == StatusCode.OKEY:
+                try:
+                    graph = self.remote_process_client.read_graph()
                     world = self.remote_process_client.read_world()
-                    moves = strategy.get_moves(world, graph)
-                    if moves:
-                        for move in moves:
-                            self.remote_process_client.move(move)
-                    self.remote_process_client.turn()
-            finally:
-                self.remote_process_client.logout()
+                    strategy = Strategy(graph, world, player_data)
+                    while strategy.in_progress:
+                        world = self.remote_process_client.read_world()
+                        moves = strategy.get_moves(graph, world)
+                        if moves:
+                            for move in moves:
+                                self.remote_process_client.move(move)
+                        self.remote_process_client.turn()
+                finally:
+                    self.remote_process_client.logout()
         finally:
             self.remote_process_client.close()
 
