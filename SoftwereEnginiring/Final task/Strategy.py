@@ -7,6 +7,7 @@ class Strategy:
     def __init__(self, start_data):
         self.ready_list = []
         self.home = start_data["home"]["idx"]
+        self.my_idx = start_data["idx"]
 
     def move(self, objects: Objects, map: Map):
         for train in objects.trains:
