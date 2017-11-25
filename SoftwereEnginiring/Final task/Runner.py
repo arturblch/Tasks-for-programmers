@@ -16,14 +16,14 @@ class Runner:
     def run(self):
         try:
             start_data = self.remote_process_client.login(self.name)
-            game = self.remote_process_client.read_game()
+            map_graph = self.remote_process_client.read_map()
 
             strategy = Strategy(start_data[1])
 
             for _ in range(30):                                 # 30 ticks
                 world = self.remote_process_client.read_world()
 
-                next_move = strategy.move(world, game)
+                next_move = strategy.move(world, map_graph)
                 if next_move:
                     self.remote_process_client.move(next_move)
                 self.remote_process_client.turn()

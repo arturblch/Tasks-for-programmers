@@ -3,7 +3,7 @@ import struct
 import json
 import logging
 from model.World import World
-from model.Game import Game
+from model.Map import Map
 
 # create logger
 logger = logging.getLogger('RemouteClient')
@@ -15,7 +15,7 @@ fh.setLevel(logging.DEBUG)
 
 # create console handler and set level to debug
 ch = logging.StreamHandler()
-ch.setLevel(logging.ERROR)
+ch.setLevel(logging.DEBUG)
 
 # create formatter and add it to the handlers
 formatter = logging.Formatter(
@@ -68,8 +68,6 @@ class RemoteProcessClient:
     def turn(self):
         return self.write_message('TURN')
 
-    def map(self, layer):
-        return self.write_message('MAP', {"layer": layer})
 
     def write_message(self, action, data=None):
         if action in RemoteProcessClient.ACTION:
@@ -141,6 +139,6 @@ class RemoteProcessClient:
         layer = self.write_message('MAP', {"layer": 1})[1]
         return World(posts=layer['post'], trains=layer['train'])
 
-    def read_game(self):
+    def read_map(self):
         layer = self.write_message('MAP', {"layer": 0})[1]
-        return Game(lines=layer['line'], points=layer['point'])
+        return Map(layer)
