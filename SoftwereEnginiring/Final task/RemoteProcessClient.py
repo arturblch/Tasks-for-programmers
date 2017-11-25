@@ -2,7 +2,7 @@ import socket
 import struct
 import json
 import logging
-from model.World import World
+from model.Objects import Objects
 from model.Map import Map
 
 # create logger
@@ -135,9 +135,9 @@ class RemoteProcessClient:
     def write_bytes(self, byte_array):
         self.socket.sendall(byte_array)
 
-    def read_world(self):
+    def read_objects(self):
         layer = self.write_message('MAP', {"layer": 1})[1]
-        return World(posts=layer['post'], trains=layer['train'])
+        return Objects(layer)
 
     def read_map(self):
         layer = self.write_message('MAP', {"layer": 0})[1]

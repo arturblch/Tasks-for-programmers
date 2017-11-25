@@ -21,9 +21,9 @@ class Runner:
             strategy = Strategy(start_data[1])
 
             for _ in range(30):                                 # 30 ticks
-                world = self.remote_process_client.read_world()
+                objects = self.remote_process_client.read_objects()
 
-                next_move = strategy.move(world, map_graph)
+                next_move = strategy.move(objects, map_graph)
                 if next_move:
                     self.remote_process_client.move(next_move)
                 self.remote_process_client.turn()
