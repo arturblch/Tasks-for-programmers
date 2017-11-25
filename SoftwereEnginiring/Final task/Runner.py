@@ -22,9 +22,10 @@ class Runner:
                     world = self.remote_process_client.read_world()
                     strategy = Strategy(graph, world, player_data)
                     while strategy.in_progress:
-                        world = self.remote_process_client.read_world()
-                        moves = strategy.get_moves(graph, world)
+                        self.remote_process_client.update_world(world)
+                        moves = strategy.get_moves(world)
                         if moves:
+                            print(moves)
                             for move in moves:
                                 self.remote_process_client.move(move)
                         self.remote_process_client.turn()
