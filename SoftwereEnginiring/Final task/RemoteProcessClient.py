@@ -58,7 +58,7 @@ class RemoteProcessClient:
     def turn(self):
         return self.write_message('TURN')
 
-    def map(self, layer):
+    def map(self, layer=1):
         return self.write_message('MAP', {"layer": layer})
 
     def write_message(self, action, data=None):
@@ -89,16 +89,13 @@ class RemoteProcessClient:
         length = self.read_uint()
         if length == -1:
             return None
-
         byte_array = self.read_bytes(length)
         return byte_array.decode()
 
     def write_string(self, value):
         if value is None:
             return
-
         byte_array = value.encode()
-
         self.write_uint(len(byte_array))
         self.write_bytes(byte_array)
 
@@ -116,11 +113,9 @@ class RemoteProcessClient:
         byte_array = b''
         while len(byte_array) < byte_count:
             byte_array += self.socket.recv(byte_count - len(byte_array))
-
         if len(byte_array) != byte_count:
             raise IOError(
                 "Error read %s bytes from input stream." % str(byte_count))
-
         return byte_array
 
     def write_bytes(self, byte_array):
@@ -129,6 +124,10 @@ class RemoteProcessClient:
     def read_objects(self):
         layer = self.write_message('MAP', {"layer": 1})[1]
         return Objects(layer)
+
+    def update_objects(self, objects):
+        layer = self.write_message('MAP', {"layer": 1})[1]
+        objects.update(layer)
 
     def read_map(self):
         layer = self.write_message('MAP', {"layer": 0})[1]
