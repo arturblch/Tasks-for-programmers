@@ -82,7 +82,7 @@ class GUI:
         client = Runner()
         done = False
         try:
-            start_data = client.remote_process_client.login(client.name)
+            status, start_data = client.remote_process_client.login(client.name)
             self.map = client.remote_process_client.read_map()
             while not done:
                 self.update()
