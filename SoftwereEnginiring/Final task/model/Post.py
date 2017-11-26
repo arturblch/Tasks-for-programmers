@@ -1,11 +1,14 @@
 class Post:
-    def __init__(self, idx, name, product, type, armor=None, population=None):
-        self.armor = armor
-        self.idx = idx
-        self.name = name
-        self.population = population
-        self.product = product
-        self.type = type
+    def __init__(self, response):
+        self.type = response['type']
+        if self.type == 1:
+            self.armor = response['armor']
+            self.idx = response['idx']
+            self.name = response['name']
+            self.population = response['population']
+            self.product = response['product']
 
-    def __repr__(self):
-        return self.name
+        if self.type == 2:
+            self.idx = response['idx']
+            self.name = response['name']
+            self.product = response['product']

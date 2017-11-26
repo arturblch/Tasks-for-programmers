@@ -2,10 +2,8 @@ import socket
 import struct
 import json
 import logging
-import networkx as nx
-from model.Move import Move
-from model.Post import Post
-from model.Train import Train
+from model.Objects import Objects
+from model.Map import Map
 
 # create logger
 logger = logging.getLogger('RemouteClient')
@@ -47,8 +45,6 @@ class RemoteProcessClient:
         self.socket.connect((host, port))
         logger.info("Connection done")
         self.socket.settimeout(5)
-        self.read_buffer = bytes()
-        self.read_index = 0
 
     def login(self, name):
         return self.write_message('LOGIN', {"name": name})
@@ -56,7 +52,7 @@ class RemoteProcessClient:
     def logout(self):
         return self.write_message('LOGOUT')
 
-    def move(self, move: Move):
+    def move(self, move):
         return self.write_message('MOVE', {"line_idx": move.line_idx, "speed": move.speed, "train_idx": move.train_idx})
 
     def turn(self):
@@ -130,27 +126,10 @@ class RemoteProcessClient:
     def write_bytes(self, byte_array):
         self.socket.sendall(byte_array)
 
-    def read_world(self):
+    def read_objects(self):
         layer = self.write_message('MAP', {"layer": 1})[1]
-        posts = {post['idx']: Post(**post) for post in layer['post']}
-        trains = {train['idx']: Train(**train) for train in layer['train']}
-        return posts, trains
+        return Objects(layer)
 
-    def update_world(self, trains):
-        update = self.write_message('MAP', {"layer": 1})[1]
-        posts = {post['idx']: Post(**post) for post in update['post']}
-        for train in update['train']:
-            trains[train['idx']].update(**train)
-        return posts, trains
-
-    def read_graph(self):
+    def read_map(self):
         layer = self.write_message('MAP', {"layer": 0})[1]
-        return self.build_graph(layer)
-
-    def build_graph(self, layer):
-        graph = nx.Graph()
-        for point in layer['point']:
-            graph.add_node(point['idx'], post_id=point['post_id'])
-        for line in layer['line']:
-            graph.add_edge(*line['point'], idx=line['idx'], length=line['length'])
-        return graph
+        return Map(layer)

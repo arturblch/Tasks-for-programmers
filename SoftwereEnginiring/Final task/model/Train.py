@@ -1,12 +1,12 @@
 class Train:
-    def __init__(self, capacity, idx, line_idx, player_id, position, product, speed):
-        self.capacity = capacity
-        self.idx = idx
-        self.line_idx = line_idx
-        self.player_id = player_id
-        self.position = position
-        self.product = product
-        self.speed = speed
+    def __init__(self, response):
+        self.capacity = response['capacity']
+        self.idx = response['idx']
+        self.line_idx = response['line_idx']
+        self.player_id = response['player_id']
+        self.position = response['position']
+        self.product = response['product']
+        self.speed = response['speed']
         self.departure_point = None
         self.arrival_point = None
         self.current_point = None
@@ -21,11 +21,11 @@ class Train:
         self.arrival_point = None
         self.departure_point = None
 
-    def update(self, capacity, idx, line_idx, player_id, position, product, speed):
-        self.capacity = capacity
-        self.idx = idx
-        self.line_idx = line_idx
-        self.player_id = player_id
-        self.position = position
-        self.product = product
-        self.speed = speed
+    def update(self, response):
+        self.capacity = response['capacity']
+        self.idx = response['idx']
+        self.line_idx = response['line_idx']
+        self.player_id = response['player_id']
+        self.position = response['position']
+        self.product = response['product']
+        self.speed = response['speed']
