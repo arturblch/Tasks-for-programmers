@@ -2,8 +2,8 @@ import socket
 import struct
 import json
 import logging
-from model.World import World
-from model.Game import Game
+from model.Objects import Objects
+from model.Map import Map
 
 # create logger
 logger = logging.getLogger('RemouteClient')
@@ -15,7 +15,7 @@ fh.setLevel(logging.DEBUG)
 
 # create console handler and set level to debug
 ch = logging.StreamHandler()
-ch.setLevel(logging.ERROR)
+ch.setLevel(logging.DEBUG)
 
 # create formatter and add it to the handlers
 formatter = logging.Formatter(
@@ -39,28 +39,18 @@ class RemoteProcessClient:
 
     ACTION = {"LOGIN": 1, "LOGOUT": 2, "MOVE": 3, "TURN": 5, "MAP": 10}
 
-    RESULT = {
-        "OKEY": 0,
-        "BAD_COMMAND": 1,
-        "RESOURCE_NOT_FOUND": 2,
-        "PATH_NOT_FOUND": 3,
-        "ACCESS_DENIED": 5
-    }
-
     def __init__(self, host, port):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         logger.info("Create socket")
         self.socket.connect((host, port))
         logger.info("Connection done")
         self.socket.settimeout(5)
-        self.read_buffer = bytes()
-        self.read_index = 0
 
     def login(self, name):
         return self.write_message('LOGIN', {"name": name})
 
     def logout(self):
-        self.write_message('LOGOUT')
+        return self.write_message('LOGOUT')
 
     def move(self, move):
         return self.write_message('MOVE', {"line_idx": move.line_idx, "speed": move.speed, "train_idx": move.train_idx})
@@ -68,7 +58,7 @@ class RemoteProcessClient:
     def turn(self):
         return self.write_message('TURN')
 
-    def map(self, layer):
+    def map(self, layer=1):
         return self.write_message('MAP', {"layer": layer})
 
     def write_message(self, action, data=None):
@@ -80,8 +70,7 @@ class RemoteProcessClient:
             raise ValueError("Received wrong action=%s" % action)
         self.write_string(json.dumps(data))
         logger.info("Loging message: %s", data)
-        if action != 'LOGOUT':
-            return self.read_response()
+        return self.read_response()
 
     def read_response(self):
         result = self.read_uint()
@@ -100,16 +89,13 @@ class RemoteProcessClient:
         length = self.read_uint()
         if length == -1:
             return None
-
         byte_array = self.read_bytes(length)
         return byte_array.decode()
 
     def write_string(self, value):
         if value is None:
             return
-
         byte_array = value.encode()
-
         self.write_uint(len(byte_array))
         self.write_bytes(byte_array)
 
@@ -127,20 +113,22 @@ class RemoteProcessClient:
         byte_array = b''
         while len(byte_array) < byte_count:
             byte_array += self.socket.recv(byte_count - len(byte_array))
-
         if len(byte_array) != byte_count:
             raise IOError(
                 "Error read %s bytes from input stream." % str(byte_count))
-
         return byte_array
 
     def write_bytes(self, byte_array):
         self.socket.sendall(byte_array)
 
-    def read_world(self):
+    def read_objects(self):
         layer = self.write_message('MAP', {"layer": 1})[1]
-        return World(posts=layer['post'], trains=layer['train'])
+        return Objects(layer)
 
-    def read_game(self):
+    def update_objects(self, objects):
+        layer = self.write_message('MAP', {"layer": 1})[1]
+        objects.update(layer)
+
+    def read_map(self):
         layer = self.write_message('MAP', {"layer": 0})[1]
-        return Game(lines=layer['line'], points=layer['point'])
+        return Map(layer)
